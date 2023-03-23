@@ -1,6 +1,6 @@
-package com.example.pharmacy.api.service;
+package com.example.project.api.service;
 
-import com.example.pharmacy.api.dto.KakaoApiResponseDto;
+import com.example.project.api.dto.KakaoApiResponseDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
