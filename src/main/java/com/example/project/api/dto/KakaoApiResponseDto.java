@@ -1,4 +1,4 @@
-package com.example.pharmacy.api.dto;
+package com.example.project.api.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

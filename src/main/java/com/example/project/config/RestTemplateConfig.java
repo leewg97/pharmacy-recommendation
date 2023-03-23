@@ -1,4 +1,4 @@
-package com.example.pharmacy.config;
+package com.example.project.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
