@@ -30,6 +30,10 @@ dependencies {
 	runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
 	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
 	annotationProcessor 'org.projectlombok:lombok'
+
+	// spring retry
+	implementation 'org.springframework.retry:spring-retry'
+
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
 	// spock
@@ -42,6 +46,10 @@ dependencies {
 	// testcontainers
 	testImplementation 'org.testcontainers:spock:1.17.1'
 	testImplementation 'org.testcontainers:mariadb:1.17.1'
+
+	// mockWebServer
+	testImplementation('com.squareup.okhttp3:okhttp:4.10.0')
+	testImplementation('com.squareup.okhttp3:mockwebserver:4.10.0')
 
 }
 
