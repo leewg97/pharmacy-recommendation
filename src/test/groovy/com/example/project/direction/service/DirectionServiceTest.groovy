@@ -1,6 +1,8 @@
 package com.example.project.direction.service
 
 import com.example.project.api.dto.DocumentDto
+import com.example.project.api.service.KakaoCategorySearchService
+import com.example.project.direction.repository.DirectionRepository
 import com.example.project.pharmacy.dto.PharmacyDto
 import com.example.project.pharmacy.service.PharmacySearchService
 import spock.lang.Specification
@@ -8,8 +10,12 @@ import spock.lang.Specification
 class DirectionServiceTest extends Specification {
 
     private PharmacySearchService pharmacySearchService = Mock()
+    private DirectionRepository directionRepository = Mock()
+    private KakaoCategorySearchService kakaoCategorySearchService = Mock()
+    private Base62Service base62Service = Mock()
 
-    private DirectionService directionService = new DirectionService(pharmacySearchService)
+    private DirectionService directionService = new DirectionService(
+            pharmacySearchService, directionRepository, kakaoCategorySearchService,base62Service)
 
     private List<PharmacyDto> pharmacyList
 
@@ -33,7 +39,7 @@ class DirectionServiceTest extends Specification {
         )
     }
 
-    def "buildDirectionList - 결과 값이 거리순으로 정렬이 되는지 확인"() {
+    def "buildDirectionList - 결과 값이 거리 순으로 정렬이 되는지 확인"() {
         given:
         def addressName = "서울 성북구 종암로10길"
         double inputLatitude = 37.5960650456809
@@ -46,7 +52,7 @@ class DirectionServiceTest extends Specification {
                 .build()
 
         when:
-        pharmacySearchService.searchPharmacyDtoList() >> pharmacyList  // pharmacySearchService 에서 searchPharmacyDtoList 호출할 때 pharmacyList 리턴해라
+        pharmacySearchService.searchPharmacyDtoList() >> pharmacyList
 
         def results = directionService.buildDirectionList(documentDto)
 
@@ -56,7 +62,7 @@ class DirectionServiceTest extends Specification {
         results.get(1).targetPharmacyName == "돌곶이온누리약국"
     }
 
-    def "buildDirectionList - 정해진 반경 10Km 내에 검색이 되는지 확인"() {
+    def "buildDirectionList - 정해진 반경 10 km 내에 검색이 되는지 확인"() {
         given:
         pharmacyList.add(
                 PharmacyDto.builder()
