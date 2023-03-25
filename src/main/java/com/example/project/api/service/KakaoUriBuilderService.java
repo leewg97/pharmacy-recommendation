@@ -11,7 +11,7 @@ import java.net.URI;
 public class KakaoUriBuilderService {
 
     private static final String KAKAO_LOCAL_SEARCH_ADDRESS_URL = "https://dapi.kakao.com/v2/local/search/address.json";
-    private static final String KAKAO_LOCAL_CATEGORY_SEARCH_URL = "https://dapi.kakao.com/v2/local/search/address.json";
+    private static final String KAKAO_LOCAL_CATEGORY_SEARCH_URL = "https://dapi.kakao.com/v2/local/search/category.json";
 
     public URI buildUriByAddressSearch(String address) {
         UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(KAKAO_LOCAL_SEARCH_ADDRESS_URL);
@@ -33,7 +33,7 @@ public class KakaoUriBuilderService {
         uriBuilder.queryParam("x", longitude);
         uriBuilder.queryParam("y", latitude);
         uriBuilder.queryParam("radius", meterRadius);
-        uriBuilder.queryParam("sort","distance");
+        uriBuilder.queryParam("sort", "distance");
 
         URI uri = uriBuilder.build().encode().toUri();
 

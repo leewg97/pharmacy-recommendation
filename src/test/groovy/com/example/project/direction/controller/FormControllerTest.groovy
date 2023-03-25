@@ -14,7 +14,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 class FormControllerTest extends Specification {
 
-    private MockMvc mockMvc;
+    private MockMvc mockMvc
     private PharmacyRecommendationService pharmacyRecommendationService = Mock()
     private List<OutputDto> outputDtoList
 
@@ -26,10 +26,10 @@ class FormControllerTest extends Specification {
         outputDtoList = new ArrayList<>()
         outputDtoList.addAll(
                 OutputDto.builder()
-                        .PharmacyName("pharmacy1")
+                        .pharmacyName("pharmacy1")
                         .build(),
                 OutputDto.builder()
-                        .PharmacyName("Pharmacy2")
+                        .pharmacyName("pharmacy2")
                         .build()
         )
     }
@@ -61,8 +61,8 @@ class FormControllerTest extends Specification {
         resultActions
                 .andExpect(status().isOk())
                 .andExpect(view().name("output"))
-                .andExpect(model().attributeExists("outputFormList"))           // model에 outputFormList라는 key가 존재하는지 확인 즉, name에 해당하는 데이터가 model에 있는지 검증
-                .andExpect(model().attribute("outputFormList", outputDtoList))    // name에 해당하는 데이터가 value 객체인지 검증
+                .andExpect(model().attributeExists("outputFormList"))           // model에 outputFormList라는 key가 존재하는지 확인. 즉, name에 해당하는 데이터가 model에 있는지 검증
+                .andExpect(model().attribute("outputFormList", outputDtoList))  // name에 해당하는 데이터가 value 객체인지 검증
                 .andDo(print())
     }
 }

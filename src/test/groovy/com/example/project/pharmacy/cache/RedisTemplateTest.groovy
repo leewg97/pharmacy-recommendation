@@ -42,7 +42,7 @@ class RedisTemplateTest extends AbstractIntegrationContainerBaseTest {
         def key = "hashKey"
 
         when:
-        hashOperations.put(key, "subKey", "value" )
+        hashOperations.put(key, "subKey", "value")
 
         then:
         def result = hashOperations.get(key, "subKey")
@@ -55,4 +55,5 @@ class RedisTemplateTest extends AbstractIntegrationContainerBaseTest {
         def size = hashOperations.size(key)
         size == entries.size()
     }
+
 }

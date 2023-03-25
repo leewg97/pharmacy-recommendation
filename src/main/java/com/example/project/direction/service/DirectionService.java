@@ -24,8 +24,8 @@ import java.util.stream.Collectors;
 public class DirectionService {
 
     private static final int MAX_SEARCH_COUNT = 3;  // 약국 최대 검색 갯수
-    private static final double RADIUS_KM = 10.0;   // 반경 10Km
-    private static final String DIRECTION_BASE_URL = "https://map/kakao.com/link/map/";
+    private static final double RADIUS_KM = 10.0;   // 반경 10 km
+    private static final String DIRECTION_BASE_URL = "https://map.kakao.com/link/map/";
 
     private final PharmacySearchService pharmacySearchService;
     private final DirectionRepository directionRepository;
@@ -43,7 +43,7 @@ public class DirectionService {
         Direction direction = directionRepository.findById(decodedId).orElse(null);
 
         String params = String.join(",", direction.getTargetPharmacyName(),
-                String.valueOf(direction.getInputLatitude()), String.valueOf(direction.getInputLongitude()));
+                String.valueOf(direction.getTargetLatitude()), String.valueOf(direction.getTargetLongitude()));
 
         // 약국 이름이 한글이기 때문에 인코딩
         String result = UriComponentsBuilder.fromHttpUrl(DIRECTION_BASE_URL + params)
@@ -54,7 +54,7 @@ public class DirectionService {
 
     public List<Direction> buildDirectionList(DocumentDto documentDto) {
 
-        if(Objects.isNull(documentDto)) return Collections.emptyList();
+        if (Objects.isNull(documentDto)) return Collections.emptyList();
 
         return pharmacySearchService.searchPharmacyDtoList()
                 .stream().map(pharmacyDto ->
@@ -79,7 +79,7 @@ public class DirectionService {
 
     // pharmacy search by category kakao api
     public List<Direction> buildDirectionListByCategoryApi(DocumentDto inputDocumentDto) {
-        if(Objects.isNull(inputDocumentDto)) return Collections.emptyList();
+        if (Objects.isNull(inputDocumentDto)) return Collections.emptyList();
 
         return kakaoCategorySearchService
                 .requestPharmacyCategorySearch(inputDocumentDto.getLatitude(), inputDocumentDto.getLongitude(), RADIUS_KM)

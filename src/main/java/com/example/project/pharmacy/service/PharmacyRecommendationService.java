@@ -37,17 +37,17 @@ public class PharmacyRecommendationService {
         KakaoApiResponseDto kakaoApiResponseDto = kakaoAddressSearchService.requestAddressSearch(address);
 
         if (Objects.isNull(kakaoApiResponseDto) || CollectionUtils.isEmpty(kakaoApiResponseDto.getDocumentList())) {
-            log.error("[PharmacyRecommendationService recommendPharmacyList fail] Input address : {}", address);
+            log.error("[PharmacyRecommendationService recommendPharmacyList fail] Input address: {}", address);
             return Collections.emptyList();
         }
 
         DocumentDto documentDto = kakaoApiResponseDto.getDocumentList().get(0);
 
         // 공공기관 약국 데이터 및 거리 계산 알고리즘 이용
-         List<Direction> directionList = directionService.buildDirectionList(documentDto);
+        List<Direction> directionList = directionService.buildDirectionList(documentDto);
 
-        // kakao 카테고리를 이용한 장소 겸색 api 이용
-//        List<Direction> directionList = directionService.buildDirectionListByCategoryApi(documentDto);
+        // kakao 카테고리를 이용한 장소 검색 api 이용
+        //List<Direction> directionList = directionService.buildDirectionListByCategoryApi(documentDto);
 
         return directionService.saveAll(directionList)
                 .stream()
@@ -58,12 +58,11 @@ public class PharmacyRecommendationService {
     private OutputDto convertToOutputDto(Direction direction) {
 
         return OutputDto.builder()
-                .PharmacyName(direction.getTargetPharmacyName())
-                .pharmacyAddress(direction.getTargetPharmacyName())
+                .pharmacyName(direction.getTargetPharmacyName())
+                .pharmacyAddress(direction.getTargetAddress())
                 .directionUrl(baseUrl + base62Service.encodeDirectionId(direction.getId()))
-                .roadViewUrl(ROAD_VIEW_BASE_URL + direction.getTargetPharmacyName() + "," + direction.getTargetLatitude())
+                .roadViewUrl(ROAD_VIEW_BASE_URL + direction.getTargetLatitude() + "," + direction.getTargetLongitude())
                 .distance(String.format("%.2f km", direction.getDistance()))
                 .build();
     }
-
 }

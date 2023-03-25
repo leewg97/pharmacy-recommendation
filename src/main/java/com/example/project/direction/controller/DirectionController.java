@@ -23,5 +23,4 @@ public class DirectionController {
         return "redirect:" + result;
     }
 
-
 }

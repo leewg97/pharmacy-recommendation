@@ -19,14 +19,14 @@ public class PharmacyRepositoryService {
 
     // self invocation test
     public void bar(List<Pharmacy> pharmacyList) {
-        log.info("bar CurrentTransactionName: "+ TransactionSynchronizationManager.getCurrentTransactionName());
+        log.info("bar CurrentTransactionName: " + TransactionSynchronizationManager.getCurrentTransactionName());
         foo(pharmacyList);
     }
 
     // self invocation test
     @Transactional
     public void foo(List<Pharmacy> pharmacyList) {
-        log.info("foo CurrentTransactionName: "+ TransactionSynchronizationManager.getCurrentTransactionName());
+        log.info("foo CurrentTransactionName: " + TransactionSynchronizationManager.getCurrentTransactionName());
         pharmacyList.forEach(pharmacy -> {
             pharmacyRepository.save(pharmacy);
             throw new RuntimeException("error"); // 예외 발생
@@ -45,7 +45,7 @@ public class PharmacyRepositoryService {
         Pharmacy entity = pharmacyRepository.findById(id).orElse(null);
 
         if (Objects.isNull(entity)) {
-            log.error("[PharmacyRepositoryService updateAddress] not fount id : {}", id);
+            log.error("[PharmacyRepositoryService updateAddress] not found id: {}", id);
             return;
         }
 
@@ -53,11 +53,11 @@ public class PharmacyRepositoryService {
     }
 
     // for test
-    public void updateAddressWithoutTransactional(Long id, String address) {
+    public void updateAddressWithoutTransaction(Long id, String address) {
         Pharmacy entity = pharmacyRepository.findById(id).orElse(null);
 
         if (Objects.isNull(entity)) {
-            log.error("[PharmacyRepositoryService updateAddress] not fount id : {}", id);
+            log.error("[PharmacyRepositoryService updateAddress] not found id: {}", id);
             return;
         }
 

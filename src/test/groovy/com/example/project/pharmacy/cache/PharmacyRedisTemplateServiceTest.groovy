@@ -11,9 +11,9 @@ class PharmacyRedisTemplateServiceTest extends AbstractIntegrationContainerBaseT
 
     def setup() {
         pharmacyRedisTemplateService.findAll()
-            .forEach(dto -> {
-                pharmacyRedisTemplateService.delete(dto.getId())
-            })
+                .forEach(dto -> {
+                    pharmacyRedisTemplateService.delete(dto.getId())
+                })
     }
 
     def "save success"() {
