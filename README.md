@@ -72,6 +72,4 @@
 
 ## Result 
 
-![B59714A5-16A6-4C55-895A-0D3E39BC5641](https://user-images.githubusercontent.com/77063888/227749318-7cf53c23-34e4-42dc-940f-47467687d49a.jpeg)
-
-![96724FC1-C9BC-4031-9E4F-A84FC358F8F5](https://user-images.githubusercontent.com/77063888/227749321-a29e2674-78cc-48fc-8654-0f0410e69bec.jpeg)
+<img width="1399" alt="약국 추천 서비스 스크린샷" src="https://user-images.githubusercontent.com/77063888/236698645-4dde9c78-eed8-4c44-a56e-60d667e163cc.png">
